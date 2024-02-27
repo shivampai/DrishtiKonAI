@@ -1,0 +1,26 @@
+import cv2
+import cvzone
+from picamera2 import Picamera2
+
+
+cam = Picamera2()
+
+cam.preview_configuration.main.size=(1280,720)
+cam.preview_configuration.main.format = "RGB888"
+cam.preview_configuration.align()
+cam.configure("preview")
+cam.start()
+
+classifier = cvzone.Classifier("tm/keras_model.h5","tm/labels.txt")
+
+while True:
+    cap = cam.capture_array()
+    img = cap
+    predictions,index = classifier.getPrediction(img)
+    
+    print(predictions)
+    
+    cv2.imshow("PiCAM",cap)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cv2.destroyAllWindows()

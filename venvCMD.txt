@@ -1,0 +1,13 @@
+Commands for install:
+
+cd <to_py_file_folder>
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+python3 -m pip3 install <package>
+
+----------------------------------------------------------------------
+To run:
+python3 <file_name>.py
+----------------------------------------------------------------------
